@@ -47,13 +47,9 @@ repos:
         language: script
         files: (\.tf|\.tfvars)$
         exclude: \.terraform\/.*$
-
-      - id: terraform_tfsec
-        name: Terraform validate with tfsec
-        description: Static analysis of Terraform templates to spot potential security issues.
-        require_serial: true
-        entry: hooks/terraform_tfsec.sh
-        language: script
+        args:
+          - --args=--fix
+          - --args=--recursive
 
       - id: terraform_checkov
         name: Checkov
