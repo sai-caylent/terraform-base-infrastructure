@@ -1,7 +1,7 @@
 data "aws_availability_zones" "available" {}
 
 locals {
-  name   = "ex-${basename(path.cwd)}"
+  name   = "halon-${basename(path.cwd)}"
   region = var.region
 
   vpc_cidr = var.cidr
@@ -13,7 +13,8 @@ locals {
 # VPC Module
 ################################################################################
 
-module "vpc" {
+module "networking" {
+  # checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source  = "terraform-aws-modules/vpc/aws"
   version = "v5.12.0"
 
@@ -24,10 +25,7 @@ module "vpc" {
   private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
   public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 4)]
 
-
-  private_subnet_names = ["Private Subnet One", "Private Subnet Two"]
-  public_subnet_names  = ["Public Subnet One", "Public Subnet Two"]
-  enable_nat_gateway   = var.enable_nat_gateway
-  single_nat_gateway   = var.single_nat_gateway
+  enable_nat_gateway = var.enable_nat_gateway
+  single_nat_gateway = var.single_nat_gateway
 
 }

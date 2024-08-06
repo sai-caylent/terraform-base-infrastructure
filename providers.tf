@@ -3,14 +3,13 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Account       = var.account_id
-      Configuration = "terraform-base-infrastructure"
-      Terraform     = "true"
-      Workspace     = terraform.workspace
+      configuration = "terraform-base-infrastructure"
+      terraform     = "true"
+      workspace     = terraform.workspace
       map-migrated  = var.map_migrated_tag
-      Environment   = "Staging"
-      Owner         = "NEP"
-      Project       = "NEP"
+      environment   = "Staging"
+      owner         = "NEP"
+      project       = "NEP"
     }
   }
 }

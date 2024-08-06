@@ -4,11 +4,6 @@ variable "region" {
   default     = "us-west-2"
 }
 
-variable "account_id" {
-  type        = string
-  description = "The AWS account ID where this resources will be deployed."
-}
-
 variable "map_migrated_tag" {
   type        = string
   description = "The value of the MAP migrated tag used in all the resources (at provider level)."
