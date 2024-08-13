@@ -5,6 +5,8 @@ on:
       - master
       - main
   pull_request:
+  repository_dispatch:
+    types: [trigger-terraform] # Specify the custom event type
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
@@ -98,4 +100,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -var-file=${{env.WORKSPACE_NAME}}.tfvars -auto-approve -input=false

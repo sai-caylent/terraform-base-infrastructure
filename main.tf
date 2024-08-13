@@ -30,19 +30,3 @@ module "networking" {
 
 }
 
-
-
-resource "aws_vpc_dhcp_options_association" "dns_resolver" {
-  vpc_id          = module.networking.vpc_id
-  dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
-}
-
-# DHCP options for the VPC
-resource "aws_vpc_dhcp_options" "dns_resolver" {
-  domain_name_servers = ["AmazonProvidedDNS", "172.20.0.5"]
-  domain_name         = "halon.local"
-
-  tags = {
-    Name = "demo-vds-dhcp-options"
-  }
-}
