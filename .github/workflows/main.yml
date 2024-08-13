@@ -1,12 +1,10 @@
 name: "Terraform action"
 on:
-  push:
-    branches:
-      - master
-      - main
   pull_request:
+    types: [opened, synchronize, reopened, closed]
   repository_dispatch:
     types: [trigger-terraform] # Specify the custom event type
+  workflow_dispatch: # Allows manual triggering of the workflow
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
