@@ -1,7 +1,7 @@
 data "aws_availability_zones" "available" {}
 
 locals {
-  name   = "halon-${basename(path.cwd)}"
+  name   = "halon-entertainment-${terraform.workspace}"
   region = var.region
 
   vpc_cidr = var.cidr
@@ -28,4 +28,21 @@ module "networking" {
   enable_nat_gateway = var.enable_nat_gateway
   single_nat_gateway = var.single_nat_gateway
 
+}
+
+
+
+resource "aws_vpc_dhcp_options_association" "dns_resolver" {
+  vpc_id          = module.networking.vpc_id
+  dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
+}
+
+# DHCP options for the VPC
+resource "aws_vpc_dhcp_options" "dns_resolver" {
+  domain_name_servers = ["AmazonProvidedDNS", "172.20.0.5"]
+  domain_name         = "halon.local"
+
+  tags = {
+    Name = "demo-vds-dhcp-options"
+  }
 }

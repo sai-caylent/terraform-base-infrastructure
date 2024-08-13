@@ -15,7 +15,6 @@ Terraform repository to create VPC, Security Group, Endpoint and ALB resources o
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_account_id"></a> [account\_id](#input\_account\_id) | The AWS account ID where this resources will be deployed. | `string` | n/a | yes |
 | <a name="input_cidr"></a> [cidr](#input\_cidr) | The CIDR block for the VPC. | `string` | n/a | yes |
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | Should be true if you want to provision NAT Gateways for each of your private networks | `bool` | `false` | no |
 | <a name="input_map_migrated_tag"></a> [map\_migrated\_tag](#input\_map\_migrated\_tag) | The value of the MAP migrated tag used in all the resources (at provider level). | `string` | n/a | yes |
